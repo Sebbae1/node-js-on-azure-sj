@@ -1,7 +1,7 @@
 /*
     Author: Sebastian Jaculbe - dcode
     Created: February 15th, 2026
-    Updated: February 15th, 2026
+    Updated: March 1st, 2026
 */
 
 function createDice(number) {
@@ -54,13 +54,16 @@ function createDice(number) {
     return dice
 }
 
-function randomizeDice(diceContainer, numberOfDice){
+async function randomizeDice(diceContainer, numberOfDice) {
     diceContainer.innerHTML = "";
 
-    for (let i = 0; i < numberOfDice; i++){
-        const random = Math.floor((Math.random() * 6) + 1);
-        const dice = createDice(random);
+    const response = await fetch(
+        "https://node-js-on-azure-sj-fycdfzc2e0btbpfw.canadacentral-01.azurewebsites.net/" + numberOfDice
+    );
+    const data = await response.json();
 
+    for (const value of data.rolls) {
+        const dice = createDice(value);
         diceContainer.appendChild(dice);
     }
 }
@@ -69,6 +72,9 @@ const NUMBER_OF_DICE = 5
 const diceContainer = document.querySelector(".dice-container");
 const btnRollDice = document.querySelector(".btn-roll-dice");
 const enterKey = document.querySelector(".btn-roll-dice");
+
+// Wake up the server on load
+fetch("https://node-js-on-azure-sj-fycdfzc2e0btbpfw.canadacentral-01.azurewebsites.net/");
 
 randomizeDice(diceContainer, NUMBER_OF_DICE);
 

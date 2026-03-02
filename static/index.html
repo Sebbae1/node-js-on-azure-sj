@@ -1,28 +1,17 @@
-<!--
-    Author: Sebastian Jaculbe - dcode
-    Created: February 15th, 2026
-    Updated: February 15th, 2026
--->
-
 <!DOCTYPE html>
-<html lang="utf-8">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Dice Roller</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="icon" type="image/x-icon" href="cartoon-dice.png">
-    <script src="main.js" defer></script>
-</head>
+<html>
 <body>
-    <h1>Web Dice Roller</h1>
-    <h2>Instructions</h2>
-    <p>
-        The Web Dice Roller generates five numbers from a collection of a 6-sided dice. <br>
-        The numbers presented when opening the application are already randomized. <br>
-        Select the "Roll Dice" button below to generate a new set of numbers.
-    </p>
-    <div class="dice-container"></div>
-    <button type="button" class="btn-roll-dice">Roll Dice</button>
+    <h2>Dice API Test</h2>
+    <button onclick="testRoll()">Test Roll</button>
+    <pre id="output"></pre>
+
+    <script>
+        async function testRoll() {
+            const res = await fetch("/api/roll?count=5&sides=6");
+            const data = await res.json();
+            document.getElementById("output").textContent =
+                JSON.stringify(data, null, 2);
+        }
+    </script>
 </body>
 </html>
