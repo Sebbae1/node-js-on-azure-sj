@@ -29,8 +29,6 @@ app.get("/api/roll", (req, res) => {
     });
 });
 
-
-
 const server = http.createServer((request, response) => {
     // Write the request to the log. 
     console.log(request);
@@ -59,8 +57,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
     console.log(`Dice API running on port ${PORT}`)
 );
-
-const port = process.env.PORT || 1337;
-server.listen(port);
 
 console.log("Server running at http://localhost:%d", port);
