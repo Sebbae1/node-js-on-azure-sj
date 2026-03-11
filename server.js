@@ -1,12 +1,17 @@
-const express = require("express");
-const cors = require("cors");
-
+/*
+    Creator: Sebastian Jaculbe
+    Created: March 1st, 2026
+    Updated: March 1st, 2026 
+*/
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
 const app = express();
-app.use(cors());
+const port = process.env.PORT || 3000;
 
 // Wake-up endpoint
-app.get("/api/ping", (req, res) => {
-    res.json({ status: "awake" });
+app.get('/api/wakeup', cors(), (req, res) => {
+    res.json({ status: 'awake', message: 'Server is ready.' });
 });
 
 // Dice roll endpoint
@@ -26,7 +31,10 @@ app.get("/api/roll", (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-    console.log(`Dice API running on port ${PORT}`)
-);
+app.get('/api/cors-fail', (req, res) => {
+    res.json({ message: 'CORS fail example.' });
+});
+
+app.listen(port, () => {
+    console.log(`Dice Roller API listening on port ${port}`);
+});

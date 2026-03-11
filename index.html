@@ -1,16 +1,26 @@
+<!--
+    Creator: Sebastian Jaculbe
+    Created: March 1st, 2026
+    Updated: March 1st, 2026
+-->
 <!DOCTYPE html>
 <html>
 <body>
     <h2>Dice API Test</h2>
+    <button onclick="testWakeUp()">Test Wake Up API</button>
     <button onclick="testRoll()">Test Roll</button>
     <pre id="output"></pre>
 
     <script>
-        async function testRoll() {
-            const res = await fetch("/api/roll?count=5&sides=6");
+        async function testWakeUp() {
+            const res = await fetch('/api/wakeup');
             const data = await res.json();
-            document.getElementById("output").textContent =
-                JSON.stringify(data, null, 2);
+            document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+        }
+        async function testRoll() {
+            const res = await fetch('/api/roll?sides=20');
+            const data = await res.json();
+            document.getElementById('output').innerText = JSON.stringify(data, null, 2);
         }
     </script>
 </body>
